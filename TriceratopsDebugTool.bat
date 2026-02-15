@@ -8,7 +8,7 @@ fltmc >nul 2>&1
 if %errorlevel% neq 0 (
     echo Requesting administrative privileges . . .
     powershell -Command "Start-Process '%~f0' -Verb runAs"
-    exit /b
+    goto :exit
 )
 
 :: = = = = = = = = = = = = = = = = = = = =
@@ -41,7 +41,7 @@ if "%choice%"=="5" goto :diskCleanup
 if "%choice%"=="6" goto :soundControlPanel
 if "%choice%"=="7" goto :advancedSystemSettings
 if "%choice%"=="8" goto :systemInformation
-if "%choice%"=="9" goto :eof
+if "%choice%"=="9" goto :exit
 
 cls
 echo Invalid option selected
@@ -316,5 +316,5 @@ ping 127.0.0.1 -n %_w% >nul
 exit /b
 
 :: = = = = = = = = = = = = = = = = = = = =
-:: Exit
-goto :eof
+:exit
+exit /b
